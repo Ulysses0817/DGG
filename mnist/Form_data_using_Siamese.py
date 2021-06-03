@@ -96,6 +96,6 @@ if __name__ == '__main__':
 		torch.save(similar_m,'similar_m.pkl')
 	print(similar_m.size())
 	form_data(torch.from_numpy(image_train),similar_m)
-	torch.save(label_train,'./data/mnist/mnist_label_all_siamese.pkl')
+	torch.save(label_train,'../data/mnist/mnist_label_all_siamese.pkl')
 
 
