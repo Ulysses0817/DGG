@@ -57,7 +57,7 @@ def form_data(data, similar_m):
 	for idx in range(K):
 		print(idx)
 		data_s = data[similar_m[:,idx]]
-		torch.save(to_numpy(data_s),'./data/mnist/mnist_{}_all_siamese.pkl'.format(idx))
+		torch.save(to_numpy(data_s),'../data/mnist/mnist_{}_all_siamese.pkl'.format(idx))
 
 
 
