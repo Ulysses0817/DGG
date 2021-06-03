@@ -579,14 +579,14 @@ def training_p(num_neighors):
 	image_train = []
 
 	for idx in range(num_neighors):
-		data_temp = torch.from_numpy(torch.load('./data/mnist/mnist_{}_all_siamese.pkl'.format(idx))).unsqueeze(2)
+		data_temp = torch.from_numpy(torch.load('../data/mnist/mnist_{}_all_siamese.pkl'.format(idx))).unsqueeze(2)
 		
 		image_train.append(data_temp)
 
 	image_train = to_numpy(torch.cat(image_train,dim=-1))
 	# image_train = (image_train + 1)/2
 
-	label_train = torch.load('./data/mnist/mnist_label_all_siamese.pkl')
+	label_train = torch.load('../data/mnist/mnist_label_all_siamese.pkl')
 
 
 	print('| Training data')
