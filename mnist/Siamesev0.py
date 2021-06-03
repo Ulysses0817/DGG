@@ -191,7 +191,7 @@ def cluster_acc(Y_pred, Y):
 
 if __name__ == '__main__':
 
-	with gzip.open('../data/mnist/mnist.pkl.gz') as f:
+	with gzip.open('../data/mnist/mnist_dcn.pkl.gz') as f:
 		data = pkl.load(f)
 	image_train = data['image_train']
 	label_train = data['label_train']
