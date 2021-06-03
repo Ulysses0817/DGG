@@ -288,7 +288,7 @@ if __name__ == '__main__':
 	cls_index = kmeans.labels_
 	mean = kmeans.cluster_centers_
 	acc,_ = cluster_acc(cls_index,label_train)
-	NMI = metrics.normalized_mutual_info_score(label_train, cls_index) #,average_method='arithmetic'
+	NMI = metrics.normalized_mutual_info_score(label_train, cls_index, average_method='arithmetic') #
 	print('| Kmeans ACC = {:6f} NMI = {:6f}'.format(acc,NMI))
 
 
