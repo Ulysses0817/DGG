@@ -192,7 +192,7 @@ def cluster_acc(Y_pred, Y):
 if __name__ == '__main__':
 	import argparse
 	
-	parser = argparse.ArgumentParser(description='姓名')
+	parse = argparse.ArgumentParser(description='姓名')
 	parse.add_argument("-n", "--no_reuse_data", default=0, type=int, help='run prepare_data or not')
 	parse.add_argument("-r", "--resume", default=0, type=int, help='load pretrained_weights or not')
 	args = parser.parse_args()
