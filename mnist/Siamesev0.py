@@ -190,7 +190,15 @@ def cluster_acc(Y_pred, Y):
 
 
 if __name__ == '__main__':
-
+	import argparse
+	
+	parser = argparse.ArgumentParser(description='姓名')
+	parse.add_argument("-n", "--no_reuse_data", default=0, type=int, help='run prepare_data or not')
+	parse.add_argument("-r", "--resume", default=0, type=int, help='load pretrained_weights or not')
+	args = parser.parse_args()
+	no_reuse_data = args.no_reuse_data
+	resume = args.resume
+	
 	with gzip.open('../data/mnist/mnist_dcn.pkl.gz') as f:
 		data = pkl.load(f)
 	image_train = data['image_train']
@@ -215,9 +223,9 @@ if __name__ == '__main__':
 
 	print('| Generate training data')
 
-	reuse_data = 0
+	#no_reuse_data = 0
 
-	if reuse_data == 0:
+	if no_reuse_data:
 		data1, data2, label = Form_data(torch.from_numpy(image_train))
 		torch.save(data1,'data_N1.pkl')
 		torch.save(data2,'data_N2.pkl')
@@ -232,7 +240,7 @@ if __name__ == '__main__':
 	print("| Number of positive pairs: {} Number of negative pairs: {}".format(torch.sum(label), label.size(0)-torch.sum(label)))
 	print("| Completed.")
 
-	resume = 0
+	#resume = 0
 
 	use_trainedweight = 1
 	print("2. Construct the Siamese model")
@@ -264,7 +272,7 @@ if __name__ == '__main__':
 		optimizer = optim.Adam(siamese.parameters(),lr=0.001,weight_decay=0.0001)
 		lr_scheduler = StepLR(optimizer,step_size=70,gamma=0.1)
 		print("2.2 Train the model")
-		siamese = train(siamese,optimizer,lr_scheduler,dataloader,epoch_num=100)
+		siamese = train(siamese,optimizer,lr_scheduler,dataloader,epoch_num=300)
 		torch.save(siamese,'trained_siamese.pkl')
 	else:
 		print("| Loading trained siamese network")
