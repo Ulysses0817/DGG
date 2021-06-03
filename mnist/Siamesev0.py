@@ -191,7 +191,7 @@ def cluster_acc(Y_pred, Y):
 
 if __name__ == '__main__':
 
-	with gzip.open('../data/mnist/mnist_dcn.pkl.gz') as f:
+	with gzip.open('../data/mnist/mnist.pkl.gz') as f:
 		data = pkl.load(f)
 	image_train = data['image_train']
 	label_train = data['label_train']
@@ -264,7 +264,7 @@ if __name__ == '__main__':
 		optimizer = optim.Adam(siamese.parameters(),lr=0.001,weight_decay=0.0001)
 		lr_scheduler = StepLR(optimizer,step_size=70,gamma=0.1)
 		print("2.2 Train the model")
-		siamese = train(siamese,optimizer,lr_scheduler,dataloader,epoch_num=300)
+		siamese = train(siamese,optimizer,lr_scheduler,dataloader,epoch_num=100)
 		torch.save(siamese,'trained_siamese.pkl')
 	else:
 		print("| Loading trained siamese network")
@@ -280,11 +280,9 @@ if __name__ == '__main__':
 	cls_index = kmeans.labels_
 	mean = kmeans.cluster_centers_
 	acc,_ = cluster_acc(cls_index,label_train)
-	NMI = metrics.normalized_mutual_info_score(label_train, cls_index,average_method='arithmetic')
+	NMI = metrics.normalized_mutual_info_score(label_train, cls_index) #,average_method='arithmetic'
 	print('| Kmeans ACC = {:6f} NMI = {:6f}'.format(acc,NMI))
 
-
-	
 
 	print("| Generate NN using the network")
 	similar_m_latent = cal_similar(latent,100)
